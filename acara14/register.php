@@ -1,16 +1,17 @@
 <?php
 require('koneksi.php');
-require('query.php');
+require('crud/query.php');
 $obj = new crud();
+$notif;
 
 if($_SERVER ['REQUEST_METHOD'] == 'POST'){
-    $email = $_POST['text_email'];
-    $pass = $_POST['text_pass'];
-    $name = $_POST['text_name'];
+    $email = $_POST['txt_email'];
+    $pass = $_POST['txt_pass'];
+    $name = $_POST['txt_name'];
     if($obj->insertData($email, $pass, $name)) {
-        echo'<div class="alert alert-success" > data berhasil disimpan </div>';
+        $notif = '<div class="alert alert-success" > data berhasil disimpan </div>';
     }else{
-        echo'<div class="alert alert-success" > data gagal disimpan </div>';
+        $notif = '<div class="alert alert-success" > data gagal disimpan </div>';
     }
 }
 ?>
@@ -25,16 +26,21 @@ if($_SERVER ['REQUEST_METHOD'] == 'POST'){
 <body>
   <div id="login-container">
     <h2>Register</h2>
-    <form id="login-form" method="post" action="login.php">
+    <form id="login-form" method="post" action="<?php echo $_SERVER['PHP_SELF'] ?>">
       <label for="txt_email">Username:</label>
       <input type="text" id="txt_email" name="txt_email" required>
       <label for="txt_pass">Password:</label>
       <input type="password" id="txt_pass" name="txt_pass" required>
       <label for="txt_pass">Nama:</label>
-      <input type="text" id="txt_pass" name="txt_name" required>
+      <input type="text" id="txt_name" name="txt_name" required>
       <?php
         if (isset($error)) {
             echo '<div style="color: red;">' . $error . '</div>';
+        }
+      ?>
+      <?php
+        if (isset($notif)) {
+            echo $notif;
         }
       ?>
       <button type="submit" name="submit">Register</button>
