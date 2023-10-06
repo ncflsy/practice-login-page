@@ -11,10 +11,11 @@
     <title>Home</title>
   </head>
   <body>
-    <h1>Selamat datang <?php echo $email; ?></h1>
+    <h1>Selamat datang, <?php echo $email; ?>!</h1>
     <table border='1'>
       <tr>
         <td>No</td>
+        <td>ID</td>
         <td>Email</td>
         <td>Nama</td>
         <td></td>
@@ -27,6 +28,7 @@
     ?>
           <tr>
             <td><?php echo $no;?></td>
+            <td><?php echo $row['id'];?></td>
             <td><?php echo $row['user_email'];?></td>
             <td><?php echo $row['fullname'];?></td>
             <td>

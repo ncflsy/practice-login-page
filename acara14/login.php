@@ -29,10 +29,6 @@ if (isset($_POST['submit'])) {
     } else {
         $error = 'Data tidak boleh kosong';
     }
-
-    if (isset($error)) {
-        echo '<div style="color: red;">' . $error . '</div>';
-    }
 }
 ?>
 <!DOCTYPE html>
@@ -52,8 +48,13 @@ if (isset($_POST['submit'])) {
       
       <label for="txt_pass">Password:</label>
       <input type="password" id="txt_pass" name="txt_pass" required>
-      
+      <?php
+        if (isset($error)) {
+            echo '<div style="color: red;">' . $error . '</div>';
+        }
+      ?>
       <button type="submit" name="submit">Login</button>
+      <label>Belum punya akun? <a href="register.php">daftar</a></label>
     </form>
   </div>
 </body>

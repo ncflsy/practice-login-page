@@ -17,17 +17,29 @@ if($_SERVER ['REQUEST_METHOD'] == 'POST'){
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
-        <p>email</p>
-        <input type="text" name="txt_email" required>
-        <p>password</p>
-        <input type="text" name="txt_password" required>
-        <button type="submit" name="register">Register</button>
+  <div id="login-container">
+    <h2>Register</h2>
+    <form id="login-form" method="post" action="login.php">
+      <label for="txt_email">Username:</label>
+      <input type="text" id="txt_email" name="txt_email" required>
+      <label for="txt_pass">Password:</label>
+      <input type="password" id="txt_pass" name="txt_pass" required>
+      <label for="txt_pass">Nama:</label>
+      <input type="text" id="txt_pass" name="txt_name" required>
+      <?php
+        if (isset($error)) {
+            echo '<div style="color: red;">' . $error . '</div>';
+        }
+      ?>
+      <button type="submit" name="submit">Register</button>
+      <label>Sudah punya akun? <a href="login.php">login</a></label>
     </form>
+  </div>
 </body>
 </html>
