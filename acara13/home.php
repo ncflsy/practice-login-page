@@ -1,54 +1,43 @@
-<?php
-require('koneksi.php');
-
-session_start();
-
-if(isset($_POST['submit'])){
-    $email = $_POST['email'];
-    $pass = $_POST['pass'];
-
-    if(!empty(trim($email)) && !empty(trim($pass))){
-        $query = "select from login where user_email = '$user_email'";
-        $result = mysqli_query($koneksi, $query);
-        $num = mysqli_num_rows($result);
-
-        while(mysqli_fetch_array($result)){
-            $id = $row['id'];
-            $emailVal = $row['user_email'];
-            $passVal = $row['user_pass'];
-        }
-
-        if($num != 0){
-            if($emailVal == $email && $passVal == $pass){
-                header('Location: home.php');
-            }else{
-                $error = 'user dan pasword salah ';
-                header('Location: login.php');
-            }
-        }  else{
-            $error = "user tidak ditemukan";
-            echo $error;
-        }
-    }else{
-        $error = "data kosongg";
-        echo "$error";
-    }
-}
+<?php 
+require ("koneksi.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Page</title>
+    <title>Document</title>
 </head>
 <body>
-    <form action="">
-        <p>email: </p>
-        <input type="text" name="txt_email">
-        <p>password: </p>
-        <input type="text" name="txt_pass">
-        <button type="submit" name="submit">Sign In</button>
-    </form>
+    <h1>Selamat datang <?php echo $email; ?></h1>
+    <table border="1">
+        <tr>
+            <td>No</td>
+            <td>Email</td>
+            <td>Nama</td>
+            <td>Aksi</td>
+        </tr>
+        <?php
+            $query = "select * from login";
+            $result = mysqli_query($koneksi, $query);
+            $no;
+            while($row = mysqli_fetch_array($result)){
+                $userMail = $row['user_email'];
+                $userName = $row['fullname'];
+            }
+        ?>
+        <tr>
+            <td><?php echo $no; ?></td>
+            <td><?php echo $userMail; ?></td>
+            <td><?php echo $userName; ?></td>
+            <td>
+                <a href="edit.php?id=<?php echo $row['id'] ?>">edit</a>
+                <a href="hapus.php?id=<?php echo $row['id'] ?>">hapus</a>
+            </td>
+        </tr>
+        <?php
+        $no++;
+        ?>
+    </table>
 </body>
 </html>
